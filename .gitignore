@@ -1,1 +1,7 @@
 /node_modules
+.idea/infrun-nodejs-tdd.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/vcs.xml
