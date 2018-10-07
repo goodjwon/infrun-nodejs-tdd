@@ -15,7 +15,7 @@ app.get('/users', (req, res) => {
     res.json(users);
 })
 
-app.listen(3000, function(){
+app.listen(3000, function () {
     console.log('server is running');
 })
 
