@@ -12,8 +12,28 @@ let users = [
 
 
 app.get('/users', (req, res) => {
-    res.json(users);
-})
+    // limit 가 넘오 오지 않으면 10을 기본으로 설정한다.
+    req.query.limit = req.query.limit || 10;
+
+    // 문자로 넘어온 limit 값을 숫자로 변환 한다.
+    const limit = parseInt(req.query.limit, 10);
+
+    // 숫자로 넘어오지 않으면 400을 응답값으로 돌려 주고 종료 한다.
+    if (Number.isNaN(limit)) {
+        return res.status(400).end();
+    }
+
+    // 결과 값을 json 으로 응답한다.
+    res.json(users.slice(0, limit));
+});
+
+app.get('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    const user = users.filter((user) => user.id === id)[0];
+
+    res.json(user)
+});
+
 
 app.listen(3000, function () {
     console.log('server is running');
