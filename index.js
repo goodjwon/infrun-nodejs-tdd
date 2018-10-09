@@ -37,6 +37,14 @@ app.get('/users/:id', (req, res) => {
 });
 
 
+app.delete('/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    users = users.filter(user => user.id !== id);
+    res.status(204).end();
+
+});
+
+
 app.listen(3000, function () {
     console.log('server is running');
 })

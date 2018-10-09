@@ -62,4 +62,15 @@ describe('GET /user/1는', () => {
                 .end(done)
         })
     })
-})
+});
+
+describe('GET /user/1는', () => {
+    describe('성공시', () => {
+        it('204를 리턴한다.', (done) => {
+            request(app)
+                .delete('/users/1')
+                .expect(204)
+                .end(done);
+        })
+    })
+});
