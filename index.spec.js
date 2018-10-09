@@ -46,4 +46,20 @@ describe('GET /user/1는', () => {
                 })
         })
     })
+
+    describe('실패시', () => {
+        it('아이디가 숫자형이 아니면 400을 리턴한다.', (done) => {
+            request(app)
+                .get('/users/one')
+                .expect(400)
+                .end(done)
+        });
+
+        it('id로 사용자를 찾을 수 없을 경우 404을 리턴한다.', (done) => {
+            request(app)
+                .get('/users/999')
+                .expect(404)
+                .end(done)
+        })
+    })
 })
