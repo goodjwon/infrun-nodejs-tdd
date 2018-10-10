@@ -82,3 +82,29 @@ describe('GET /user/1는', () => {
         })
     });
 });
+
+
+describe('POST /users/ 는', () => {
+    describe('성공시', () => {
+        let body;
+        before((done) => {
+            request(app)
+                .post('/users')
+                .send({name: 'hjhapyy77'})
+                .expect(201)    //201를 리턴한다.
+                .end((err, res) => {
+                    body = res.body;
+                    done();
+                });
+
+        });
+
+        it('객채 리턴한다.', () => {
+            body.should.have.property('id');
+        });
+
+        it('입력한 값을 반환한다.', () => {
+            body.should.have.property('name', 'hjhapyy77')
+        });
+    });
+});
