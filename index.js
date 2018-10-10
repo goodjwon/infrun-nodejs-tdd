@@ -50,6 +50,12 @@ app.delete('/users/:id', (req, res) => {
 
 app.post('/users', (req, res) => {
     const name = req.body.name;
+    if (!name) return res.status(400).end();
+
+    const userNameDublicationCheck = users.filter(user => user.name === name).length > 0
+    if (userNameDublicationCheck) return res.status(409).end();
+
+
     const id = Date.now();
     const user = {id, name};
     users.push(user);

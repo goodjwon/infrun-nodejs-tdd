@@ -107,4 +107,20 @@ describe('POST /users/ 는', () => {
             body.should.have.property('name', 'hjhapyy77')
         });
     });
+    describe('실패시', () => {
+        it('name 파라미터 누락시 400을 리턴한다.', (done) => {
+            request(app)
+                .post('/users')
+                .send({})
+                .expect(400)
+                .end(done);
+        });
+        it('name 중복일 경우 409를 리턴한다.', (done) => {
+            request(app)
+                .post('/users')
+                .send({name: 'hjhapyy77'})
+                .expect(409)
+                .end(done);
+        })
+    })
 });
