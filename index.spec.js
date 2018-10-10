@@ -64,7 +64,7 @@ describe('GET /user/1는', () => {
     })
 });
 
-describe('GET /user/1는', () => {
+describe('DELETE /user/1는', () => {
     describe('성공시', () => {
         it('204를 리턴한다.', (done) => {
             request(app)
@@ -124,3 +124,18 @@ describe('POST /users/ 는', () => {
         })
     })
 });
+
+describe('PUT /users/:id', () => {
+    describe('성공시', () => {
+            it('변경된 name를 리턴한다.', (done) => {
+                request(app)
+                    .put('/users/3')
+                    .send({name: 'sopia'})
+                    .end((err, res) => {
+                        res.body.should.have.property('name', 'sopia');
+                        done();
+                    })
+            })
+        }
+    )
+})
