@@ -72,5 +72,13 @@ describe('GET /user/1는', () => {
                 .expect(204)
                 .end(done);
         })
-    })
+    });
+    describe('실패시', () => {
+        it('id가 숫자가 아닐경우 400을 리턴한다.', (done) => {
+            request(app)
+                .delete('/users/one')
+                .expect(400)
+                .end(done);
+        })
+    });
 });
