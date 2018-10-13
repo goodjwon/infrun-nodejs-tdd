@@ -1,9 +1,7 @@
 // api 로직
-let users = [
-    {id: 1, name: 'goodjwon'},
-    {id: 2, name: 'jw76park'},
-    {id: 3, name: 'jwon76'}
-]
+const models = require('../../models');
+
+
 
 const index = (req, res) => {
     req.query.limit = req.query.limit || 10;     // limit 가 넘오 오지 않으면 10을 기본으로 설정한다.
@@ -12,7 +10,10 @@ const index = (req, res) => {
         return res.status(400).end();
     }
 
-    res.json(users.slice(0, limit));    // 결과 값을 json 으로 응답한다.
+    models.User.findAll({})
+        .then(users => {
+            res.json(users);
+        })
 };
 
 
