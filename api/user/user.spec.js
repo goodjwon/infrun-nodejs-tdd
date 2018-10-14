@@ -5,13 +5,15 @@ const models = require('../../models');
 
 describe('GET /user는, ', () => {
     describe('성공.', () => {
+        const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
         before(() => models.sequelize.sync({force: true}));
-        it.only('유저를 배열로 담은 객체로 리턴함', (done) => {
+        before(() => models.User.bulkCreate(users));
+
+        it('유저를 배열로 담은 객체로 리턴함', (done) => {
             request(app)
                 .get('/users')
                 .end((err, res) => {
                     res.body.should.be.instanceOf(Array);
-                    console.log(res.body);
                     done();
                 })
         });
@@ -21,11 +23,10 @@ describe('GET /user는, ', () => {
                 .get('/users?limit=2')
                 .end((err, res) => {
                     res.body.should.have.length(2)
-                    console.log(res.body);
                     done();
                 })
         })
-    })
+    });
 
     describe('실패시', () => {
         it('limit 숫자형이 아니면 400을 리턴한다.', (done) => {
@@ -66,7 +67,7 @@ describe('GET /user/1는', () => {
     })
 });
 
-describe('DELETE /user/1는', () => {
+describe.only('DELETE /user/1는', () => {
     describe('성공시', () => {
         it('204를 리턴한다.', (done) => {
             request(app)
