@@ -95,7 +95,7 @@ describe('DELETE /user/1는', () => {
 });
 
 
-describe.only('POST /users/ 는', () => {
+describe('POST /users/ 는', () => {
     const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
     before(() => models.sequelize.sync({force: true}));
     before(() => models.User.bulkCreate(users));
@@ -141,6 +141,10 @@ describe.only('POST /users/ 는', () => {
 });
 
 describe('PUT /users/:id', () => {
+    const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
+
     describe('성공시', () => {
             it('변경된 name를 리턴한다.', (done) => {
                 request(app)
@@ -174,7 +178,7 @@ describe('PUT /users/:id', () => {
         it('이름이 중복일 경우 409을 응답합니다.', (done) => {
             request(app)
                 .put('/users/3')
-                .send({name: 'sopia'})
+                .send({name: 'jwon76'})
                 .expect(409)
                 .end(done)
         });
