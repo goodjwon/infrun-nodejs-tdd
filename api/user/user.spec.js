@@ -4,11 +4,11 @@ const app = require('../../');
 const models = require('../../models');
 
 describe('GET /user는, ', () => {
-    describe('성공.', () => {
-        const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
-        before(() => models.sequelize.sync({force: true}));
-        before(() => models.User.bulkCreate(users));
+    const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
 
+    describe('성공.', () => {
         it('유저를 배열로 담은 객체로 리턴함', (done) => {
             request(app)
                 .get('/users')
@@ -39,6 +39,10 @@ describe('GET /user는, ', () => {
 });
 
 describe('GET /user/1는', () => {
+    const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
+
     describe('성공시', () => {
         it('id가 1인 유저 객체를 반환한다.', (done) => {
             request(app)
@@ -67,7 +71,11 @@ describe('GET /user/1는', () => {
     })
 });
 
-describe.only('DELETE /user/1는', () => {
+describe('DELETE /user/1는', () => {
+    const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
+
     describe('성공시', () => {
         it('204를 리턴한다.', (done) => {
             request(app)
@@ -87,7 +95,11 @@ describe.only('DELETE /user/1는', () => {
 });
 
 
-describe('POST /users/ 는', () => {
+describe.only('POST /users/ 는', () => {
+    const users = [{name: 'goodjwon'}, {name: 'jwon76'}, {name: 'jw76park'}]
+    before(() => models.sequelize.sync({force: true}));
+    before(() => models.User.bulkCreate(users));
+
     describe('성공시', () => {
         let body;
         before((done) => {
